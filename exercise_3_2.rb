@@ -48,8 +48,10 @@ def word (a)
 end
 
 def each_word (a)
-    
-
+ arr=[]
+ arr=a.word(a)
+   arr.each do |word|
+   yield word
 end
 end
 
@@ -61,3 +63,8 @@ a=Document.new({:author => "someone", :title => "my book", :content => "this is 
 
 arr[]
 arr=a.word(a)
+
+
+a.each_word(a) do |word|
+puts word
+end

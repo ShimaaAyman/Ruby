@@ -19,11 +19,88 @@
 require 'time'
 
 module Generic
-   
+   def current_date
+       time1=Time.now
+       return time1
+   end
 end
 
 
 class Document
-    
+
+include Generic
+
+attr_accessor :author, :title , :content
+
+def initialize(attr)
+   @author=attr[:author]
+   @title=attr[:title]
+   @content=attr[:content]
 end
+
+def initialize(attr)
+   @author=attr[:author]
+   @title=attr[:title]
+   @content=attr[:content]
+end
+
+def + (b)
+   @author=self.author
+   @title=self.title
+
+   if b.is_a? String
+      self.content.concat(b)
+   else
+      self.content.concate(b.content)
+      
+   end
+   return self
+end 
+end 
+
+def word (a)
+    arr=[]
+    arr=a.content.split(" ").map {|i|i.to_s}
+
+end
+
+def each_word (a)
+ arr=[]
+ arr=a.word(a)
+   arr.each do |word|
+   yield word
+   end
+end
+
+
+def title_with_date (a)
+    #Generic::current_date
+    date=current_date
+    date=Date.parse(date)
+    date.strftime("%a, %d %b %Y")
+    str=a.title" ".concat(date)
+    return str
+end
+
+def replace_word(old_word, new_word , a)
+    arr=[]
+    arr=a.word(a)
+    arr.each do |word|
+    if
+     arr[word]==old_word
+     arr[word]=new_word
+    end
+  end
+end
+end
+
+
+
+
+
+a=Document.new({:author => "someone", :title => "my book", :content => "this is the content of my book"})
+
+str=a.title_with_date(a)
+a.replace_word("content" , "gggggg" , a)
+
 
