@@ -15,12 +15,33 @@
 
 
 class Document
+
+attr_accessor :author, :title , :content
+
+def initialize(attr)
+   @author=attr[:author]
+   @title=attr[:title]
+   @content=attr[:content]
+end
+def + (b)
+   @author=self.author
+   @title=self.title
+
+   if b.is_a? String
+      self.content.concat(b)
+   else
+      self.content.concat(b.content)
+      
+   end
+   return self
+end 
+
 end
 
 
 # These examples should work
-a=Document.new(:author => "someone", :title => "my book", :content => "this is the content of my book")
-b=Document.new(:author => "someone", :title => "my book", :content => "and so is this.")
+a=Document.new({:author => "someone", :title => "my book", :content => "this is the content of my book"})
+b=Document.new({:author => "someone", :title => "my book", :content => "and so is this."})
 
 add_content = a + b
 puts add_content.content
